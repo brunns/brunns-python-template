@@ -1,0 +1,69 @@
+# {{ package_name }}
+
+{{ project_description }}
+
+Requires [uv](https://docs.astral.sh/uv/), [xc](https://xcfile.dev/), [colima](https://github.com/abiosoft/colima) and [terraform](https://developer.hashicorp.com/terraform).
+
+## Tasks
+
+### {{ package_name }}
+
+Run {{ package_name }}
+
+```sh
+uv run {{ package_name }}
+```
+
+### pc
+
+Precommit tasks
+
+Requires: test, lint
+
+```python
+#!/usr/bin/env python
+import this
+```
+
+### test
+
+Run tests
+
+Requires: unit, integration
+
+### unit
+
+Unit tests
+
+```sh
+uv run pytest tests/unit/ --durations=10 --cov-report term-missing --cov-fail-under 100 --cov {{ package_name }}
+```
+
+### integration
+
+Integration tests
+
+```sh
+if command -v colima > /dev/null; then colima status || colima start; fi
+uv run pytest tests/integration/ -s
+```
+
+
+### format
+
+Format code
+
+```sh
+uv run ruff format .
+uv run ruff check . --fix-only
+```
+
+### lint
+
+Lint code
+
+```sh
+uv run ruff format . --check
+uv run ruff check .
+uv run pyright
+```

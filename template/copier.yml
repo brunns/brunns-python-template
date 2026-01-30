@@ -1,0 +1,10 @@
+package_name:
+  help: "The python package name"
+
+project_description:
+  help: "A brief description of the project"
+  default: "Aggregate, de-duplicate and republish RSS feeds."
+
+_tasks:
+  - "cat pyproject.base.toml >> pyproject.toml"
+  - "rm pyproject.base.toml"
