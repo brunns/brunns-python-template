@@ -34,8 +34,8 @@ EOF
 
 uvx copier copy `realpath ../template` . --data "package_name=$PACKAGE" --data "project_description=$DESCRIPTION" --overwrite --trust
 
-uv add arrow 'httpx[http2]' yarl `gum filter aws-wsgi defusedxml django fastapi flask 'flask[async]' gunicorn pydantic python-json-logger sqlalchemy 'sqlalchemy[asyncio]' wireup --no-limit --header 'Select Packages:'`
-uv add --dev ruff pytest pyright mockito pyhamcrest mbtest pytest-cov pytest-docker `gum filter brunns-matchers freezegun pyfakefs pytest-asyncio pytest-mockito respx scripttest --no-limit --header 'Select Test Packages:'`
+uv add arrow 'httpx[http2]' yarl `gum filter aws-wsgi boto3 defusedxml django fastapi flask 'flask[async]' gunicorn uvicorn pydantic python-json-logger stamina sqlalchemy 'sqlalchemy[asyncio]' wireup --no-limit --header 'Select Packages:'`
+uv add --dev ruff pytest pyright mockito pyhamcrest mbtest pytest-cov pytest-docker `gum filter brunns-matchers factory-boy faker freezegun pyfakefs pytest-asyncio pytest-mockito respx scripttest --no-limit --header 'Select Test Packages:'`
 
 xc format
 xc pc
