@@ -13,13 +13,14 @@ brew install uv gum colima xc && brew upgrade uv gum colima xc
 
 ## Instructions
 
-The `build.sh` script takes 2 arguments:
+The `build` script takes 3 optional arguments:
 
 * Package name
 * Package description
+* Output location - package will be created under this directory
 
 ```sh
-./build.sh "sausages" "Sausages thing" 
+./build "sausages" "Sausages thing" ..
 ```
 
 The user will be prompted if these are not provided.
