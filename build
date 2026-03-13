@@ -43,13 +43,12 @@ cat <<EOF >> .gitignore
 # Custom
 .idea/
 requirements.txt
-terraform/.terraform.lock.hcl
 *.zip
 EOF
 
-uvx copier copy "$TEMPLATE_PATH" . --data "package_name=$PACKAGE" --data "project_description=$DESCRIPTION" --overwrite --trust
+uvx copier copy "$TEMPLATE_PATH" . --data "package_name=$PACKAGE" --data "module_name=${PACKAGE//-/_}" --data "project_description=$DESCRIPTION" --overwrite --trust
 
-uv add arrow 'httpx[http2]' yarl `gum filter aws-wsgi boto3 celery defusedxml django fastapi flask 'flask[async]' gunicorn uvicorn pydantic python-json-logger stamina sqlalchemy 'sqlalchemy[asyncio]' wireup --no-limit --header 'Select Packages:'`
+uv add arrow 'httpx[http2]' yarl `gum filter boto3 celery defusedxml django fastapi flask 'flask[async]' gunicorn pydantic stamina structlog sqlalchemy 'sqlalchemy[asyncio]' wireup --no-limit --header 'Select Packages:'`
 uv add --dev ruff pytest pyright mockito pyhamcrest mbtest pytest-cov pytest-docker `gum filter brunns-matchers factory-boy faker freezegun polyfactory pyfakefs pytest-asyncio pytest-mockito respx scripttest --no-limit --header 'Select Test Packages:'`
 
 xc format

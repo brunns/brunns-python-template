@@ -5,7 +5,7 @@ from mbtest.matchers import had_request
 from mbtest.imposters import Imposter, Predicate, Response, Stub
 from yarl import URL
 
-from {{ package_name }} import hello
+from {{ module_name }} import hello
 
 
 def test_request_to_mock_server(mock_server):

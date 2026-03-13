@@ -19,6 +19,7 @@ uv run {{ package_name }}
 Precommit tasks
 
 Requires: test, lint
+RunDeps: async
 
 ```python
 #!/usr/bin/env python
@@ -30,13 +31,14 @@ import this
 Run tests
 
 Requires: unit, integration
+RunDeps: async
 
 ### unit
 
 Unit tests
 
 ```sh
-uv run pytest tests/unit/ --durations=10 --cov-report term-missing --cov-fail-under 100 --cov {{ package_name }}
+uv run pytest tests/unit/ --durations=10 --cov-report term-missing --cov-fail-under 100 --cov src/
 ```
 
 ### integration
@@ -66,4 +68,21 @@ Lint code
 uv run ruff format . --check
 uv run ruff check .
 uv run pyright
+```
+
+### push
+
+Push to origin, and monitor CI workflow
+
+Requires: pc
+
+Inputs: WORKFLOW
+
+Environment: WORKFLOW=ci.yml
+
+```sh
+git push
+sleep 5
+RUN_ID=$(gh run list --workflow="$WORKFLOW" --limit=1 --json databaseId --jq '.[0].databaseId')
+gh run watch "$RUN_ID" --exit-status
 ```
